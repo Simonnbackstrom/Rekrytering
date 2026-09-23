@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import AnsokanForm from "./AnsokanForm";
 
 export default function Home() {
   return (
@@ -131,15 +132,10 @@ export default function Home() {
             Låter det som du?
           </h2>
           <p className="mt-5 text-[17px] sm:text-[18px] text-[var(--color-ink-muted)] leading-relaxed">
-            Skicka CV och några rader om dig själv. Urval sker löpande.
+            Fyll i formuläret nedan och bifoga ditt CV. Urval sker löpande.
           </p>
-          <a
-            href="mailto:jobb@bohlins-maskiner.se?subject=Ans%C3%B6kan%20Logistik%20och%20lageradministrat%C3%B6r"
-            className="btn-primary mt-8"
-          >
-            Skicka ansökan
-          </a>
-          <p className="mt-6 text-[14px] text-[var(--color-ink-muted)]">
+          <AnsokanForm />
+          <p className="mt-8 text-[14px] text-[var(--color-ink-muted)]">
             Frågor? Mejla{" "}
             <a
               href="mailto:jobb@bohlins-maskiner.se"
