@@ -1,18 +1,25 @@
 @import "tailwindcss";
 
 @theme {
-  /* Bohlins Maskiner - riktig profil */
+  /* Bohlins Maskiner – officiell grafisk profil */
+  --color-navy: #0e3a8a;
   --color-primary: #009fe3;
   --color-primary-dark: #0083bd;
-  --color-primary-light: #e6f6fd;
+  --color-sky: #71cbf4;
+  --color-teal: #2fb093;
+  --color-orange: #f08019;
+  --color-grey-light: #b0b5bb;
+  --color-grey-dark: #3a4147;
 
   --color-bg: #ffffff;
-  --color-bg-alt: #f7f9fb;
-  --color-ink: #1a2b3a;
-  --color-ink-muted: #556472;
-  --color-border: #e5eaf0;
+  --color-bg-alt: #f1f3f5;
+  --color-ink: #3a4147;
+  --color-ink-muted: #5a6670;
+  --color-border-soft: #d1d6db;
 
-  --font-sans: var(--font-nunito), ui-sans-serif, system-ui, -apple-system, sans-serif;
+  /* Rubriker: Helvetica Neue Italic. Brödtext: Proxima Nova (via Typekit) med systemfallback. */
+  --font-heading: "Helvetica Neue", Helvetica, "Arial", sans-serif;
+  --font-body: "proxima-nova", "Helvetica Neue", "Helvetica", "Arial", sans-serif;
 }
 
 *, *::before, *::after { box-sizing: border-box; }
@@ -25,26 +32,34 @@ html {
 body {
   background: var(--color-bg);
   color: var(--color-ink);
-  font-family: var(--font-sans);
+  font-family: var(--font-body);
+  font-weight: 300;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   overflow-x: hidden;
   max-width: 100vw;
-  line-height: 1.65;
-  font-weight: 400;
+  line-height: 1.6;
 }
 
-ul li {
+h1, h2 {
+  font-family: var(--font-heading);
+  font-style: italic;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  color: var(--color-grey-dark);
+}
+
+ul.bullets li {
   padding-left: 18px;
   position: relative;
 }
-ul li::before {
+ul.bullets li::before {
   content: "";
   position: absolute;
-  left: 0;
+  left: 2px;
   top: 0.75em;
-  width: 6px;
-  height: 6px;
+  width: 5px;
+  height: 5px;
   border-radius: 50%;
   background: var(--color-primary);
 }
@@ -54,12 +69,13 @@ ul li::before {
   color: #fff;
 }
 
-.eyebrow {
+.eyebrow,
+.sub-eyebrow {
   display: inline-block;
-  font-size: 12px;
-  letter-spacing: 0.14em;
+  font-size: 13px;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: var(--color-primary);
+  color: var(--color-navy);
   font-weight: 700;
 }
 
@@ -67,32 +83,52 @@ ul li::before {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 8px;
-  padding: 14px 26px;
+  padding: 14px 28px;
   background: var(--color-primary);
   color: #fff;
-  font-weight: 700;
+  font-weight: 600;
   font-size: 15px;
-  border-radius: 4px;
   transition: background 0.2s ease;
+  border-radius: 2px;
 }
 .btn-primary:hover { background: var(--color-primary-dark); }
 
-.btn-outline {
+.btn-nav {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 8px;
-  padding: 14px 26px;
-  border: 1px solid var(--color-border);
-  color: var(--color-ink);
+  padding: 10px 28px;
+  border: 1px solid var(--color-primary);
+  color: var(--color-primary);
   font-weight: 600;
   font-size: 15px;
-  border-radius: 4px;
-  background: #fff;
-  transition: border-color 0.2s ease, color 0.2s ease;
+  transition: background 0.2s ease, color 0.2s ease;
+  border-radius: 2px;
 }
-.btn-outline:hover {
-  border-color: var(--color-primary);
+.btn-nav:hover { background: var(--color-primary); color: #fff; }
+
+.form-input {
+  width: 100%;
+  padding: 12px 14px;
+  border: 1px solid var(--color-grey-dark);
+  background: #fff;
+  font-size: 15px;
+  font-family: var(--font-body);
+  color: var(--color-ink);
+  border-radius: 2px;
+}
+.form-input:focus {
+  outline: 2px solid var(--color-primary);
+  outline-offset: -1px;
+}
+
+.file-btn {
+  display: inline-block;
+  padding: 8px 18px;
+  border: 1px solid var(--color-primary);
   color: var(--color-primary);
+  font-weight: 600;
+  font-size: 14px;
+  cursor: pointer;
+  border-radius: 2px;
 }

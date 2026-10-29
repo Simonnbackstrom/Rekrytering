@@ -1,9 +1,11 @@
 "use client";
 
-import { useState } from "react";
+import { useRef, useState } from "react";
 
 export default function AnsokanForm() {
   const [status, setStatus] = useState<"idle" | "submitting" | "success" | "error">("idle");
+  const [fileName, setFileName] = useState<string>("Ingen fil vald");
+  const fileRef = useRef<HTMLInputElement>(null);
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -17,6 +19,7 @@ export default function AnsokanForm() {
       if (!res.ok) throw new Error();
       setStatus("success");
       (e.target as HTMLFormElement).reset();
+      setFileName("Ingen fil vald");
     } catch {
       setStatus("error");
     }
@@ -24,80 +27,87 @@ export default function AnsokanForm() {
 
   if (status === "success") {
     return (
-      <div className="mt-8 p-6 rounded-md border border-[var(--color-border)] bg-[var(--color-primary-light)]">
-        <p className="text-[17px] font-bold text-[var(--color-ink)]">Tack för din ansökan!</p>
+      <div className="mt-10 p-6 border border-[var(--color-border-soft)] bg-[var(--color-bg-alt)]">
+        <p className="text-[17px] font-bold text-[var(--color-ink)]">
+          Tack för din ansökan!
+        </p>
         <p className="mt-2 text-[15px] text-[var(--color-ink-muted)]">
-          Vi återkommer så snart vi har läst igenom din ansökan.
+          Vi återkommer så snart vi har läst igenom den.
         </p>
       </div>
     );
   }
 
   return (
-    <form onSubmit={handleSubmit} className="mt-8 space-y-5">
+    <form onSubmit={handleSubmit} className="mt-10 space-y-6 max-w-[640px]">
       <div>
         <label htmlFor="namn" className="block text-[14px] font-bold mb-2">
-          Namn
+          Namn *
         </label>
-        <input
-          id="namn"
-          name="namn"
-          type="text"
-          required
-          className="w-full px-4 py-3 rounded-md border border-[var(--color-border)] bg-white text-[15px] focus:outline-none focus:border-[var(--color-primary)]"
-        />
+        <input id="namn" name="namn" type="text" required className="form-input" />
       </div>
 
       <div>
         <label htmlFor="epost" className="block text-[14px] font-bold mb-2">
-          E-post
+          E-post *
         </label>
-        <input
-          id="epost"
-          name="epost"
-          type="email"
-          required
-          className="w-full px-4 py-3 rounded-md border border-[var(--color-border)] bg-white text-[15px] focus:outline-none focus:border-[var(--color-primary)]"
-        />
+        <input id="epost" name="epost" type="email" required className="form-input" />
       </div>
 
       <div>
         <label htmlFor="telefon" className="block text-[14px] font-bold mb-2">
           Telefon
         </label>
-        <input
-          id="telefon"
-          name="telefon"
-          type="tel"
-          className="w-full px-4 py-3 rounded-md border border-[var(--color-border)] bg-white text-[15px] focus:outline-none focus:border-[var(--color-primary)]"
-        />
+        <input id="telefon" name="telefon" type="tel" className="form-input" />
       </div>
 
       <div>
         <label htmlFor="meddelande" className="block text-[14px] font-bold mb-2">
-          Om dig
+          Berätta kort om dig och varför du söker *
         </label>
         <textarea
           id="meddelande"
           name="meddelande"
-          rows={5}
+          rows={6}
           required
-          className="w-full px-4 py-3 rounded-md border border-[var(--color-border)] bg-white text-[15px] focus:outline-none focus:border-[var(--color-primary)] resize-y"
+          className="form-input resize-y"
         />
+        <p className="mt-2 text-[13px] text-[var(--color-ink-muted)]">
+          Ersätter personligt brev.
+        </p>
       </div>
 
       <div>
         <label htmlFor="cv" className="block text-[14px] font-bold mb-2">
-          CV (PDF)
+          CV, PDF eller Word *
         </label>
+        <div className="flex items-center gap-4">
+          <button
+            type="button"
+            onClick={() => fileRef.current?.click()}
+            className="file-btn"
+          >
+            Välj fil
+          </button>
+          <span className="text-[14px] text-[var(--color-ink-muted)]">{fileName}</span>
+        </div>
         <input
+          ref={fileRef}
           id="cv"
           name="cv"
           type="file"
+          required
           accept=".pdf,.doc,.docx"
-          className="block w-full text-[14px] text-[var(--color-ink-muted)] file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-[14px] file:font-bold file:bg-[var(--color-primary-light)] file:text-[var(--color-primary)] hover:file:bg-[var(--color-primary-light)]"
+          onChange={(e) =>
+            setFileName(e.target.files?.[0]?.name ?? "Ingen fil vald")
+          }
+          className="hidden"
         />
       </div>
+
+      <p className="text-[13px] text-[var(--color-ink-muted)] leading-relaxed">
+        När du skickar din ansökan behandlar vi dina personuppgifter för att kunna genomföra rekryteringen. Vi sparar uppgifterna tills tjänsten är tillsatt och raderar dem därefter.
+      </p>
 
       <button
         type="submit"
@@ -109,7 +119,7 @@ export default function AnsokanForm() {
 
       {status === "error" && (
         <p className="text-[14px] text-red-600">
-          Något gick fel. Försök igen eller mejla jobb@bohlins-maskiner.se.
+          Något gick fel. Försök igen eller mejla mikael@bohlins-maskiner.se.
         </p>
       )}
     </form>
