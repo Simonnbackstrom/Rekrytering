@@ -106,7 +106,7 @@ export default function AnsokanForm() {
       </div>
 
       <p className="text-[13px] text-[var(--color-ink-muted)] leading-relaxed">
-        När du skickar din ansökan behandlar vi dina personuppgifter för att kunna genomföra rekryteringen. Vi sparar uppgifterna tills tjänsten är tillsatt och raderar dem därefter.
+        När du skickar din ansökan behandlar vi dina personuppgifter för att kunna genomföra rekryteringen. Vi sparar dem i 3 månader efter avslutad rekrytering och raderar dem sedan.
       </p>
 
       <button
@@ -117,9 +117,13 @@ export default function AnsokanForm() {
         {status === "submitting" ? "Skickar…" : "Skicka ansökan"}
       </button>
 
+      <p className="text-[17px] leading-relaxed text-[var(--color-ink-muted)] max-w-[640px]">
+        Frågor om tjänsten? Kontakta vd Mikael Bohlin på 070-767 78 87 eller mikael@bohlins-maskiner.se.
+      </p>
+
       {status === "error" && (
         <p className="text-[14px] text-red-600">
-          Något gick fel. Försök igen eller mejla mikael@bohlins-maskiner.se.
+          Något gick fel. Försök igen.
         </p>
       )}
     </form>
