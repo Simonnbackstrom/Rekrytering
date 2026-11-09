@@ -4,6 +4,7 @@ import { useRef, useState } from "react";
 
 export default function AnsokanForm() {
   const [status, setStatus] = useState<"idle" | "submitting" | "success" | "error">("idle");
+  const [cvPending, setCvPending] = useState(false);
   const [fileName, setFileName] = useState<string>("Ingen fil vald");
   const fileRef = useRef<HTMLInputElement>(null);
 
@@ -17,6 +18,8 @@ export default function AnsokanForm() {
         body: formData,
       });
       if (!res.ok) throw new Error();
+      const data = (await res.json()) as { ok: boolean; cvPending?: boolean };
+      setCvPending(Boolean(data.cvPending));
       setStatus("success");
       (e.target as HTMLFormElement).reset();
       setFileName("Ingen fil vald");
@@ -32,7 +35,9 @@ export default function AnsokanForm() {
           Tack för din ansökan!
         </p>
         <p className="mt-2 text-[15px] text-[var(--color-ink-muted)]">
-          Vi återkommer så snart vi har läst igenom den.
+          {cvPending
+            ? "Vi har skickat en bekräftelse till din e-post. Svara på det mejlet och bifoga ditt CV när du har det till hands – så kommer det direkt till Mikael."
+            : "Vi återkommer så snart vi har läst igenom den."}
         </p>
       </div>
     );
@@ -79,7 +84,7 @@ export default function AnsokanForm() {
 
       <div>
         <label htmlFor="cv" className="block text-[14px] font-bold mb-2">
-          CV, PDF eller Word *
+          CV, PDF eller Word
         </label>
         <div className="flex items-center gap-4">
           <button
@@ -96,13 +101,15 @@ export default function AnsokanForm() {
           id="cv"
           name="cv"
           type="file"
-          required
           accept=".pdf,.doc,.docx"
           onChange={(e) =>
             setFileName(e.target.files?.[0]?.name ?? "Ingen fil vald")
           }
           className="hidden"
         />
+        <p className="mt-2 text-[13px] text-[var(--color-ink-muted)]">
+          Har du inte CV:t till hands? Skicka in formuläret ändå – du får ett mejl där du kan svara med CV bifogat när det passar.
+        </p>
       </div>
 
       <p className="text-[13px] text-[var(--color-ink-muted)] leading-relaxed">
