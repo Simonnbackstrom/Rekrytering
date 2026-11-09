@@ -13,8 +13,8 @@
 
   --color-bg: #ffffff;
   --color-bg-alt: #f1f3f5;
-  --color-ink: #3a4147;
-  --color-ink-muted: #5a6670;
+  --color-ink: #1f2428;
+  --color-ink-muted: #3a4147;
   --color-border-soft: #d1d6db;
 
   /* Rubriker: Helvetica Neue Italic. Brödtext: Proxima Nova (via Typekit) med systemfallback. */
@@ -33,7 +33,7 @@ body {
   background: var(--color-bg);
   color: var(--color-ink);
   font-family: var(--font-body);
-  font-weight: 300;
+  font-weight: 400;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   overflow-x: hidden;
