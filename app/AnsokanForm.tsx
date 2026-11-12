@@ -2,6 +2,12 @@
 
 import { useRef, useState } from "react";
 
+declare global {
+  interface Window {
+    fbq?: (...args: unknown[]) => void;
+  }
+}
+
 export default function AnsokanForm() {
   const [status, setStatus] = useState<"idle" | "submitting" | "success" | "error">("idle");
   const [cvPending, setCvPending] = useState(false);
@@ -21,6 +27,7 @@ export default function AnsokanForm() {
       const data = (await res.json()) as { ok: boolean; cvPending?: boolean };
       setCvPending(Boolean(data.cvPending));
       setStatus("success");
+      window.fbq?.("track", "Lead", { content_name: "Teknisk fältsäljare Bohlins Maskiner" });
       (e.target as HTMLFormElement).reset();
       setFileName("Ingen fil vald");
     } catch {
