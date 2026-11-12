@@ -91,7 +91,7 @@ export default function AnsokanForm() {
 
       <div>
         <label htmlFor="cv" className="block text-[14px] font-bold mb-2">
-          CV, PDF eller Word
+          CV, PDF eller Word (frivilligt)
         </label>
         <div className="flex items-center gap-4">
           <button
