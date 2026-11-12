@@ -68,9 +68,9 @@ export default function AnsokanForm() {
 
       <div>
         <label htmlFor="telefon" className="block text-[14px] font-bold mb-2">
-          Telefon
+          Telefon *
         </label>
-        <input id="telefon" name="telefon" type="tel" className="form-input" />
+        <input id="telefon" name="telefon" type="tel" required className="form-input" />
       </div>
 
       <div>

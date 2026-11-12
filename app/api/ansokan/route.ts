@@ -23,7 +23,7 @@ export async function POST(req: NextRequest) {
   const cv = formData.get("cv") as File | null;
   const hasCv = cv && cv.size > 0;
 
-  if (!namn || !epost || !meddelande) {
+  if (!namn || !epost || !telefon || !meddelande) {
     return NextResponse.json({ ok: false, error: "missing_fields" }, { status: 400 });
   }
 
