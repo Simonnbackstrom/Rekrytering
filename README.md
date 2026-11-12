@@ -1,6 +1,6 @@
 # Bohlins Maskiner rekryteringssida
 
-Landningssida för rekryteringskampanj: **Logistik och lageradministratör** till Bohlins Maskiner i Sollentuna.
+Landningssida för rekryteringskampanj: **Teknisk fältsäljare** till Bohlins Maskiner i Sollentuna.
 
 ## Utveckling
 
