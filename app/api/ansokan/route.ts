@@ -39,7 +39,7 @@ export async function POST(req: NextRequest) {
     : `<p><em>Inget CV bifogat – kandidaten har fått ett bekräftelsemejl med instruktion att svara med CV. Svaret kommer till dig.</em></p>`;
 
   const html = `
-    <h2>Ny ansökan: Logistik- och lageradministratör</h2>
+    <h2>Ny ansökan: Teknisk fältsäljare</h2>
     <p><strong>Namn:</strong> ${escapeHtml(namn)}</p>
     <p><strong>E-post:</strong> ${escapeHtml(epost)}</p>
     <p><strong>Telefon:</strong> ${escapeHtml(telefon) || "–"}</p>
@@ -67,7 +67,7 @@ export async function POST(req: NextRequest) {
   if (!hasCv) {
     const confirmationHtml = `
       <p>Hej ${escapeHtml(namn)},</p>
-      <p>Tack för din ansökan till rollen som Logistik- och lageradministratör hos Bohlins Maskiner. Vi har tagit emot dina uppgifter.</p>
+      <p>Tack för din ansökan till rollen som teknisk fältsäljare hos Bohlins Maskiner. Vi har tagit emot dina uppgifter.</p>
       <p><strong>Ett sista steg:</strong> svara på detta mejl och bifoga ditt CV (PDF eller Word). Svaret går direkt till Mikael Bohlin, VD.</p>
       <p>Med vänliga hälsningar,<br>Bohlins Maskiner</p>
     `;
